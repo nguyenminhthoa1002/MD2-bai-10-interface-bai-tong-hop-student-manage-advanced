@@ -66,13 +66,25 @@ public class StudentClass implements IStudentManagement {
     }
 
     @Override
-    public void inputData(Scanner scanner) {
+    public void inputData(Scanner scanner, List<StudentClass> listStudentClass, List<Student> listStudent) {
         System.out.println("Enter Class ID: ");
+        boolean checkExist = false;
         do {
             this.classID = scanner.nextLine();
             if (this.classID.trim().length() == 5) {
                 if (this.classID.charAt(0) == 'J') {
-                    break;
+                    for (StudentClass listClass : listStudentClass) {
+                        if (listClass.getClassID().equals(this.classID)) {
+                            checkExist = true;
+                            System.err.println("This Class has existed!");
+                            break;
+                        } else {
+                            checkExist = false;
+                        }
+                    }
+                    if (!checkExist){
+                        break;
+                    }
                 } else {
                     System.err.println("Please enter Class ID start with J");
                 }
@@ -98,7 +110,7 @@ public class StudentClass implements IStudentManagement {
         System.out.println("Your choice is: ");
         do {
             int choiceClassStatus = Integer.parseInt(scanner.nextLine());
-            switch (choiceClassStatus){
+            switch (choiceClassStatus) {
                 case 1:
                     this.classStatus = "Active";
                     return;
@@ -116,6 +128,6 @@ public class StudentClass implements IStudentManagement {
 
     @Override
     public void displayData() {
-        System.out.printf("%-15s%-20s%-40s%-15s\n",this.classID,this.className,this.descriptions,this.classStatus);
+        System.out.printf("%-15s%-20s%-40s%-15s\n", this.classID, this.className, this.descriptions, this.classStatus);
     }
 }

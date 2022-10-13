@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Student implements IStudentManagement{
+public class Student implements IStudentManagement {
     private String studentID;
     private String studentName;
     private int age;
@@ -123,13 +123,25 @@ public class Student implements IStudentManagement{
     }
 
     @Override
-    public void inputData(Scanner scanner) {
+    public void inputData(Scanner scanner, List<StudentClass> listStudentClass, List<Student> listStudent) {
         System.out.println("Enter Student ID: ");
+        boolean checkExist = false;
         do {
             this.studentID = scanner.nextLine();
             if (this.studentID.trim().length() == 6) {
                 if (this.studentID.charAt(0) == 'S') {
-                    break;
+                    for (Student student : listStudent) {
+                        if (student.getStudentID().equals(this.studentID)) {
+                            System.err.println("This Student ID has existed!");
+                            checkExist = true;
+                            break;
+                        } else {
+                            checkExist = false;
+                        }
+                    }
+                    if (!checkExist){
+                        break;
+                    }
                 } else {
                     System.err.println("Please enter Student ID start with S");
                 }
@@ -140,7 +152,7 @@ public class Student implements IStudentManagement{
         System.out.println("Enter Student Name: ");
         do {
             this.studentName = scanner.nextLine();
-            if (this.studentName.trim().length()>=10 && this.studentName.trim().length()<=50) {
+            if (this.studentName.trim().length() >= 10 && this.studentName.trim().length() <= 50) {
                 break;
             } else {
                 System.err.println("Please enter Student name from 10 to 50 characters!");
@@ -149,7 +161,7 @@ public class Student implements IStudentManagement{
         System.out.println("Enter Student Age: ");
         do {
             this.age = Integer.parseInt(scanner.nextLine());
-            if (this.age >=18) {
+            if (this.age >= 18) {
                 break;
             } else {
                 System.err.println("Please enter Student Age rather or equal to 18!");
@@ -160,9 +172,9 @@ public class Student implements IStudentManagement{
         System.out.println("Enter Java Script Score: ");
         inputMark(listMarkJavaScript, scanner);
         System.out.println("Enter Java Core Score: ");
-        inputMark(listMarkJavaCore,scanner);
+        inputMark(listMarkJavaCore, scanner);
         System.out.println("Enter Java Web Score: ");
-        inputMark(listMarkJavaWeb,scanner);
+        inputMark(listMarkJavaWeb, scanner);
         System.out.println("Enter Student Status: ");
         this.studentStatus = Boolean.parseBoolean(scanner.nextLine());
     }
@@ -188,36 +200,36 @@ public class Student implements IStudentManagement{
 
     @Override
     public void displayData() {
-        System.out.printf("%-15s%-30s%-15d%-15b%-20s%-15f%-20s%-20b\n", this.studentID, this.studentName, this.age, this.gender, this.studentClass.getClassName(),this.averageMark,this.GPA,this.studentStatus);
+        System.out.printf("%-15s%-30s%-15d%-15b%-20s%-15f%-20s%-20b\n", this.studentID, this.studentName, this.age, this.gender, this.studentClass.getClassName(), this.averageMark, this.GPA, this.studentStatus);
         System.out.println("JavaScript Mark: ");
         for (Float js_mark : listMarkJavaScript) {
-            System.out.printf("%f\t",js_mark);
+            System.out.printf("%f\t", js_mark);
         }
         System.out.printf("\n");
         System.out.println("JavaCore Mark: ");
         for (Float javaCore_mark : listMarkJavaCore) {
-            System.out.printf("%f\t",javaCore_mark);
+            System.out.printf("%f\t", javaCore_mark);
         }
         System.out.printf("\n");
         System.out.println("JavaWeb Mark: ");
         for (Float javaWeb_mark : listMarkJavaWeb) {
-            System.out.printf("%f\t",javaWeb_mark);
+            System.out.printf("%f\t", javaWeb_mark);
         }
         System.out.printf("\n");
     }
 
-    public void calAvgMark(){
+    public void calAvgMark() {
         this.averageMark = (listMarkJavaScript.get(listMarkJavaScript.size() - 1) +
                 listMarkJavaCore.get(listMarkJavaCore.size() - 1) +
                 listMarkJavaWeb.get(listMarkJavaWeb.size() - 1)) / 3;
     }
 
     public void classifyByGPA() {
-        if (this.averageMark<5) {
+        if (this.averageMark < 5) {
             this.GPA = "Yếu";
-        } else if (this.averageMark<7) {
+        } else if (this.averageMark < 7) {
             this.GPA = "Trung bình";
-        } else if (this.averageMark<9) {
+        } else if (this.averageMark < 9) {
             this.GPA = "Khá";
         } else {
             this.GPA = "Giỏi";

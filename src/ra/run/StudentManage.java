@@ -132,7 +132,7 @@ public class StudentManage {
         for (int i = 0; i < numberInputClass; i++) {
             System.out.printf("Input Information Class %d\n", i + 1);
             StudentClass studentClass = new StudentClass();
-            studentClass.inputData(scanner);
+            studentClass.inputData(scanner,listStudentClass,listStudent);
             listStudentClass.add(studentClass);
         }
     }
@@ -225,7 +225,7 @@ public class StudentManage {
         for (int i = 0; i < numberInputStudent; i++) {
             System.out.printf("Input Information Student %d\n", i + 1);
             Student studentNew = new Student();
-            studentNew.inputData(scanner);
+            studentNew.inputData(scanner,listStudentClass,listStudent);
             System.out.println("Choose Class for Student: ");
             int count = 1;
             for (StudentClass listClass : listStudentClass) {
