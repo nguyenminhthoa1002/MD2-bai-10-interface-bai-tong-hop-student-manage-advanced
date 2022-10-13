@@ -95,7 +95,6 @@ public class StudentClass implements IStudentManagement {
         System.out.println("1. Active");
         System.out.println("2. Inactive");
         System.out.println("3. Not open yet");
-//        classStatusManage();
         System.out.println("Your choice is: ");
         do {
             int choiceClassStatus = Integer.parseInt(scanner.nextLine());

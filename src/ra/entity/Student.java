@@ -200,7 +200,7 @@ public class Student implements IStudentManagement{
         }
         System.out.printf("\n");
         System.out.println("JavaWeb Mark: ");
-        for (Float javaWeb_mark : listMarkJavaScript) {
+        for (Float javaWeb_mark : listMarkJavaWeb) {
             System.out.printf("%f\t",javaWeb_mark);
         }
         System.out.printf("\n");
